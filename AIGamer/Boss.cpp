@@ -4,7 +4,7 @@
 
 Boss::Boss(const Vec2& pos, BulletPool& bullets)
 	: m_shape{ pos,200 }
-	, m_hp{ 30 }
+	, m_hp{ 1 }
 	, m_state{ BossState::Idle }
 	, m_bulletPool{ bullets }
 	, m_shootCount{0}

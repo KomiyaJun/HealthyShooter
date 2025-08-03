@@ -9,6 +9,7 @@
 #include "sound.h"
 #include "ScoreItemPool.h"
 #include "Boss.h"
+#include "GameData.h"
 //================================================================================
 //進行管理
 // ===============================================================================
@@ -27,10 +28,6 @@ enum class GameState {
 	Clear,
 };
 
-struct GameData {
-	int32 score = 0;
-};
-
 //シーン管理
 enum class GameScene {
 	Explain,
@@ -42,6 +39,7 @@ enum class GameScene {
 //プレイ中/エンディング中
 enum class GamePhase {
 	Playing,
+	BossExploding,
 	Enging,
 };
 
@@ -49,13 +47,14 @@ enum class GamePhase {
 //ヘルパー関数
 //================================================================================
 
+
 //エネミーを出現させるヘルパー関数
 void SpawnWave1(Array<Enemy>& enemies) {
 	const Enemy::EnemyParam GruntParam{ .recognitionRange = 1000, .attackRange = 300,.size = 60,.fireRate = 0.1,.color = Palette::Red,.hp = 1 };
 	const Enemy::EnemyParam SniperParam{ .recognitionRange = 1000, .attackRange = 500,.size = 30, .fireRate = 0.5,.color = Palette::Green,.hp = 2 };
-	for (size_t i = 0; i < Config::wave1EnemyNum; i++) {
-		if (i < Config::wave1SpawnThreshold)	enemies.emplace_back(RandomVec2(Config::movableArea.stretched(-100)), GruntParam);
-		if (i >= Config::wave1SpawnThreshold) enemies.emplace_back(RandomVec2(Config::movableArea.stretched(-100)), SniperParam);
+	for (size_t i = 0; i < Config::wave1EnemyNum * GameData::gameLevel; i++) {
+		if (i < Config::wave1SpawnThreshold * GameData::gameLevel)	enemies.emplace_back(RandomVec2(Config::movableArea.stretched(-100)), GruntParam);
+		if (i >= Config::wave1SpawnThreshold * GameData::gameLevel) enemies.emplace_back(RandomVec2(Config::movableArea.stretched(-100)), SniperParam);
 	}
 
 }
@@ -63,18 +62,18 @@ void SpawnWave1(Array<Enemy>& enemies) {
 void SpawnWave2(Array<Enemy>& enemies) {
 	const Enemy::EnemyParam GruntParam{ .recognitionRange = 1000, .attackRange = 300,.size = 60,.fireRate = 0.1,.color = Palette::Red,.hp = 1 };
 	const Enemy::EnemyParam SniperParam{ .recognitionRange = 1000, .attackRange = 500,.size = 30, .fireRate = 0.5,.color = Palette::Green,.hp = 2 };
-	for (size_t i = 0; i < Config::wave2EnemyNum; i++) {
-		if (i < Config::wave2SpawnThreshold)	enemies.emplace_back(RandomVec2(Config::movableArea.stretched(-100)), GruntParam);
-		if (i >= Config::wave2SpawnThreshold) enemies.emplace_back(RandomVec2(Config::movableArea.stretched(-100)), SniperParam);
+	for (size_t i = 0; i < Config::wave2EnemyNum * GameData::gameLevel; i++) {
+		if (i < Config::wave2SpawnThreshold * GameData::gameLevel)	enemies.emplace_back(RandomVec2(Config::movableArea.stretched(-100)), GruntParam);
+		if (i >= Config::wave2SpawnThreshold * GameData::gameLevel) enemies.emplace_back(RandomVec2(Config::movableArea.stretched(-100)), SniperParam);
 	}
 }
 
 void SpawnWave3(Array<Enemy>& enemies) {
 	const Enemy::EnemyParam GruntParam{ .recognitionRange = 1000, .attackRange = 300,.size = 60,.fireRate = 0.1,.color = Palette::Red,.hp = 1 };
 	const Enemy::EnemyParam SniperParam{ .recognitionRange = 1000, .attackRange = 500,.size = 30, .fireRate = 0.5,.color = Palette::Green,.hp = 2 };
-	for (size_t i = 0; i < Config::wave3EnemyNum; i++) {
-		if (i < Config::wave3SpawnThreshold)	enemies.emplace_back(RandomVec2(Config::movableArea.stretched(-100)), GruntParam);
-		if (i >= Config::wave3SpawnThreshold) enemies.emplace_back(RandomVec2(Config::movableArea.stretched(-100)), SniperParam);
+	for (size_t i = 0; i < Config::wave3EnemyNum * GameData::gameLevel; i++) {
+		if (i < Config::wave3SpawnThreshold * GameData::gameLevel)	enemies.emplace_back(RandomVec2(Config::movableArea.stretched(-100)), GruntParam);
+		if (i >= Config::wave3SpawnThreshold * GameData::gameLevel) enemies.emplace_back(RandomVec2(Config::movableArea.stretched(-100)), SniperParam);
 	}
 }
 
@@ -141,7 +140,7 @@ private:
 
 
 
-// 変化する関数の作成
+// 変化する関数
 std::function<Optional<double>()> CreateValueLerp(double from, double to, double duration)
 {
 	const double startTime = Scene::Time();
@@ -227,27 +226,22 @@ void Main()
 	GamePhase nowPhase = GamePhase::Playing;	
 	Stopwatch inputDelayStopWatch;	//シーン遷移用キー入力のインターバル
 	GameState currentState = GameState::SpawingWave1;
-	
+	inputDelayStopWatch.start();//シーン遷移を正しく処理するためのタイマー
 	//===================UI====================================
 	bool showText = true;
-
-
-
-	
-	//画面を設定
+	//==================画面設定===============================
 	Window::Resize(1280, 720);
 	Window::SetTitle(U"スフィアシューター");
-
 	Scene::Resize(1920, 1080);
 	Scene::SetLetterbox(Palette::Black);
-
 	Scene::SetBackground(Palette::Black);
 
-
-
-	inputDelayStopWatch.start();
+	//==================ゲームを管理するスピーダー=============
 	Optional<std::function<Optional<double>()>> effect;
 	double sceneSpeeder = 1.0;
+
+
+	//==================処理開始===============================
 	while (System::Update())
 	{
 
@@ -308,80 +302,93 @@ void Main()
 			break;
 			//============================nowScene::Game===============================
 		case GameScene::Game:
-
+		{
 			// --- 描画処理 ---
-		{
-			// このブロックの中だけ、描画座標系がワールド座標になる
-			const auto t = camera.createTransformer();
 
-			// --- ワールド座標に描画するもの ---
-			// 背景のタイルなどを描画
-			for (int32 y = -2; y <= 2; ++y)
+			//ホワイトアウト用変数
+			static double whiteoutAlpha = 0.0;
+			static Stopwatch whiteoutTimer;
+
+
+
 			{
-				for (int32 x = -2; x <= 2; ++x)
+				// このブロックの中だけ、描画座標系がワールド座標になる
+				const auto t = camera.createTransformer();
+
+				for (int32 y = -2; y <= 2; ++y)
 				{
-					RectF{ Arg::center(x * 400, y * 400), 380 }.draw(ColorF{ 0.4, 0.5, 0.6 });
+					for (int32 x = -2; x <= 2; ++x)
+					{
+						RectF{ Arg::center(x * 400, y * 400), 380 }.draw(ColorF{ 0.4, 0.5, 0.6 });
+					}
 				}
+
+
+				for (auto& enemy : enemies)
+				{
+					enemy.draw();
+				}
+
+				if (boss) {
+					boss->draw();
+				}
+
+				player.draw();
+
+				//drawAll()
+				enemyBulletPool.drawAll();
+				playerBulletPool.drawAll();
+				scoreItemPool.drawAll();
+
+
+
+				String now = ToString(currentState);
+				SimpleGUI::GetFont()(Format(now)).drawAt({ player.getShape().center.x, player.getShape().center.y + 20 }, Palette::Black);
+
 			}
 
-			// EnemyとPlayerのdraw関数は変更しなくても、ワールド座標に描画される
-
-			for (auto& enemy : enemies)
+			//-------UI表示------------
 			{
-				enemy.draw();
+				const Vec2 hpBarPos = { 20,20 };
+				const Vec2 hpBarSize = { 300,30 };
+				const double barRounding = 5.0;
+				const double borderThickness = 2.0;
+
+				const double healthRatio = static_cast<double>(player.getHp()) / player.getMaxHp();
+
+
+				RoundRect{ hpBarPos,hpBarSize,barRounding }.draw(Palette::Black);
+
+				if (player.getHp() > 0)
+				{
+					// Arg::topLeft() を削除した正しいコンストラクタ呼び出し
+					RoundRect{ hpBarPos + Vec2{ borderThickness, borderThickness },
+							   Vec2{ (hpBarSize.x - borderThickness * 2) * healthRatio, hpBarSize.y - borderThickness * 2 },
+							   barRounding }
+					.draw(HSV{ 120, 0.7, 0.9 }); // 緑色をHSVで指定
+				}
+
+				const String hpText = U"HP: {}/{}"_fmt(player.getHp(), player.getMaxHp());
+				SimpleGUI::GetFont()(hpText).draw(Arg::leftCenter(hpBarPos.x + 10, hpBarPos.y / 2), Palette::White);
+
+
+				const String scoreText = U"SCORE: {}"_fmt(score);
+
+				SimpleGUI::GetFont()(scoreText).draw(Arg::topRight(Scene::Width() - 20, 20), Palette::White);
+
 			}
 
-			if (boss) {
-				boss->draw();
+			if (whiteoutAlpha > 0.0) {
+				Scene::Rect().draw(ColorF{ 1.0,whiteoutAlpha });
 			}
 
-			player.draw();
-
-			//drawAll()
-			enemyBulletPool.drawAll();
-			playerBulletPool.drawAll();
-			scoreItemPool.drawAll();
-
-			
-
-			String now = ToString(currentState);
-			SimpleGUI::GetFont()(Format(now)).drawAt({ player.getShape().center.x, player.getShape().center.y+20 }, Palette::Black);
-
-		}
-
-		//-------UI表示------------
-		{
-			const Vec2 hpBarPos = { 20,20 };
-			const Vec2 hpBarSize = { 300,30 };
-			const double barRounding = 5.0;
-			const double borderThickness = 2.0;
-
-			const double healthRatio = static_cast<double>(player.getHp()) / player.getMaxHp();
 
 
-			RoundRect{ hpBarPos,hpBarSize,barRounding }.draw(Palette::Black);
-
-			if (player.getHp() > 0)
-			{
-				// Arg::topLeft() を削除した正しいコンストラクタ呼び出し
-				RoundRect{ hpBarPos + Vec2{ borderThickness, borderThickness },
-						   Vec2{ (hpBarSize.x - borderThickness * 2) * healthRatio, hpBarSize.y - borderThickness * 2 },
-						   barRounding }
-				.draw(HSV{ 120, 0.7, 0.9 }); // 緑色をHSVで指定
-			}
-
-			const String hpText = U"HP: {}/{}"_fmt(player.getHp(), player.getMaxHp());
-			SimpleGUI::GetFont()(hpText).draw(Arg::leftCenter(hpBarPos.x + 10, hpBarPos.y / 2),Palette::White);
-
-
-			const String scoreText = U"SCORE: {}"_fmt(score);
-
-			SimpleGUI::GetFont()(scoreText).draw(Arg::topRight(Scene::Width() - 20, 20), Palette::White);
-
-		}
 			//===================================nowPhase::Playing====================
 			switch (nowPhase)
 			{
+
+
 			case GamePhase::Playing:
 				if (shooter.tryShoot()) {
 					player.shoot(camera, playerBulletPool);
@@ -427,9 +434,8 @@ void Main()
 				case GameState::FightingBoss:
 
 					if (enemies.isEmpty() && !boss) {
-						//状態をクリアにし、Endingへ以降
 						currentState = GameState::Clear;
-						nowPhase = GamePhase::Enging;
+						nowPhase = GamePhase::BossExploding;
 					}
 
 					break;
@@ -438,7 +444,7 @@ void Main()
 				}
 
 				for (auto& enemy : enemies) {
-					enemy.update(player.getShape().center, enemyBulletPool,sceneSpeed);
+					enemy.update(player.getShape().center, enemyBulletPool, sceneSpeed);
 				}
 
 				// カメラをプレイヤーの中心に滑らかに追従させる
@@ -489,9 +495,9 @@ void Main()
 				if (boss && boss->hasCollisionDamage() && player.getShape().intersects(boss->getShape())) {
 					if (boss && (not player.isInvincible()) && boss->hasCollisionDamage() && player.getShape().intersects(boss->getShape())) {
 						player.onHit();
-						if(player.getHp() <= 0){
+						if (player.getHp() <= 0) {
 							inputDelayStopWatch.restart();
-							nowScene = GameScene::Result;
+							nowPhase = GamePhase::BossExploding;
 						}
 					}
 				}
@@ -521,7 +527,7 @@ void Main()
 					{
 						boss.reset();
 					}
-					else 
+					else
 					{
 						boss->update(player.getShape().center, sceneSpeed);
 
@@ -530,7 +536,7 @@ void Main()
 							player.onHit();
 						}
 					}
-				}				
+				}
 				for (auto& item : scoreItemPool.getItems()) {
 					if (item.isActive() && player.getShape().intersects(item.getShape())) {
 						score += item.getValue();
@@ -540,15 +546,37 @@ void Main()
 				}
 
 				break;
-				//==================================nowPhase::Ending==============================
+
+
+
+			case GamePhase::BossExploding:
+			{
+
+				//ボスを倒した後、画面をゆっくりホワイトアウトさせる
+				if (not whiteoutTimer.isStarted())	whiteoutTimer.start();
+
+
+				const double fadeDuration = 2.0;
+
+				whiteoutAlpha = Min(whiteoutTimer.sF() / fadeDuration, 1.0);
+
+
+				if (whiteoutAlpha >= 1.0) {
+					nowPhase = GamePhase::Enging;
+				}
+
+				break;
+			}
+			//==================================nowPhase::Ending==============================
 			case GamePhase::Enging:
+
 				if (fewSecondTrue(0.5)) {
 					if (showText == true) showText = false;
 					else if (showText == false) showText = true;
 				}
 
 				if (showText == true) {
-					SimpleGUI::GetFont()(U"Clear! : PUSH TO SPACE").drawAt(Scene::Center(), Palette::White);
+					SimpleGUI::GetFont()(U"Clear! : PUSH TO SPACE").drawAt(Scene::Center(), Palette::Black);
 				}
 
 				if (KeySpace.pressed()) {
@@ -556,13 +584,18 @@ void Main()
 
 					nowScene = GameScene::Result;
 					nowPhase = GamePhase::Playing;
+
+					GameData::OnGameClear();
+					whiteoutAlpha = 0.0;
+					whiteoutTimer.reset();
+
 				}
 				break;
 			}
 
 
-
 			break;
+		}
 			//========================nowScene::Result=====================================
 		case GameScene::Result:
 
