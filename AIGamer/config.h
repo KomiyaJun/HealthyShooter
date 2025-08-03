@@ -20,10 +20,10 @@ namespace Config
 	constexpr int wave1EnemyNum = 1;
 	constexpr int wave1SpawnThreshold = 1;
 	//Wave2の出現数
-	constexpr int wave2EnemyNum = 1;
-	constexpr int wave2SpawnThreshold = 3;
+	constexpr int wave2EnemyNum = 3;
+	constexpr int wave2SpawnThreshold = 2;
 	//Wave3の出現数
-	constexpr int wave3EnemyNum = 1;
-	constexpr int wave3SpawnThreshold = 3;
+	constexpr int wave3EnemyNum = 4;
+	constexpr int wave3SpawnThreshold = 2;
 
 }

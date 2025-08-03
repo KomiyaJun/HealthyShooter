@@ -7,7 +7,7 @@ ScoreItem::ScoreItem()
 	: m_initialPos{ 0,0 }
 	, m_drawPos{ 0,0 }
 	, m_value{ 0 }
-	, m_radius{ 12.0 }
+	, m_radius{ 30.0 }
 	, m_isActive{ false }
 {
 }
