@@ -3,11 +3,11 @@
     "revision": 0,
     "rules": [
         {
-            "primary-output": "C:\\Users\\jjunk\\source\\repos\\AIGamer\\Intermediate\\AIGamer\\Debug\\Intermediate\\microsoft\\STL\\std.compat.obj",
+            "primary-output": "C:\\Users\\jjunk\\HealthyShooter\\Intermediate\\AIGamer\\Debug\\Intermediate\\microsoft\\STL\\std.compat.obj",
             "outputs": [
-                "C:\\Users\\jjunk\\source\\repos\\AIGamer\\Intermediate\\AIGamer\\Debug\\Intermediate\\microsoft\\STL\\std.compat.ixx.ifc.dt.module.json",
-                "C:\\Users\\jjunk\\source\\repos\\AIGamer\\Intermediate\\AIGamer\\Debug\\Intermediate\\microsoft\\STL\\std.compat.ixx.ifc.dt.d.json",
-                "C:\\Users\\jjunk\\source\\repos\\AIGamer\\Intermediate\\AIGamer\\Debug\\Intermediate\\microsoft\\STL\\std.compat.ifc"
+                "C:\\Users\\jjunk\\HealthyShooter\\Intermediate\\AIGamer\\Debug\\Intermediate\\microsoft\\STL\\std.compat.ixx.ifc.dt.module.json",
+                "C:\\Users\\jjunk\\HealthyShooter\\Intermediate\\AIGamer\\Debug\\Intermediate\\microsoft\\STL\\std.compat.ixx.ifc.dt.d.json",
+                "C:\\Users\\jjunk\\HealthyShooter\\Intermediate\\AIGamer\\Debug\\Intermediate\\microsoft\\STL\\std.compat.ifc"
             ],
             "provides": [
                 {

@@ -338,6 +338,7 @@
     <ClInclude Include="bullet.h" />
     <ClInclude Include="config.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="GameData.h" />
     <ClInclude Include="ScoreItem.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="ScoreItemPool.h" />

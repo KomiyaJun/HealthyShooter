@@ -17,12 +17,13 @@ namespace Config
 	// ==============
 	
 	//Wave1の出現数
-	constexpr int wave1EnemyNum = 5;
+	constexpr int wave1EnemyNum = 1;
 	constexpr int wave1SpawnThreshold = 1;
 	//Wave2の出現数
-	constexpr int wave2EnemyNum = 8;
+	constexpr int wave2EnemyNum = 1;
 	constexpr int wave2SpawnThreshold = 3;
 	//Wave3の出現数
-	constexpr int wave3EnemyNum = 10;
+	constexpr int wave3EnemyNum = 1;
 	constexpr int wave3SpawnThreshold = 3;
+
 }
