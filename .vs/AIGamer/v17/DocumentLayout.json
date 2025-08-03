@@ -7,6 +7,14 @@
       "RelativeMoniker": "D:0:0:{70E370C5-3487-4C8E-B652-EA3D011B6043}|AIGamer\\AIGamer.vcxproj|solutionrelative:AIGamer\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{70E370C5-3487-4C8E-B652-EA3D011B6043}|AIGamer\\AIGamer.vcxproj|C:\\Users\\jjunk\\HealthyShooter\\AIGamer\\BulletPool.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{70E370C5-3487-4C8E-B652-EA3D011B6043}|AIGamer\\AIGamer.vcxproj|solutionrelative:AIGamer\\BulletPool.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{70E370C5-3487-4C8E-B652-EA3D011B6043}|AIGamer\\AIGamer.vcxproj|C:\\Users\\jjunk\\HealthyShooter\\AIGamer\\BulletPool.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{70E370C5-3487-4C8E-B652-EA3D011B6043}|AIGamer\\AIGamer.vcxproj|solutionrelative:AIGamer\\BulletPool.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{70E370C5-3487-4C8E-B652-EA3D011B6043}|AIGamer\\AIGamer.vcxproj|C:\\Users\\jjunk\\HealthyShooter\\AIGamer\\Boss.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{70E370C5-3487-4C8E-B652-EA3D011B6043}|AIGamer\\AIGamer.vcxproj|solutionrelative:AIGamer\\Boss.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -55,14 +63,6 @@
       "RelativeMoniker": "D:0:0:{70E370C5-3487-4C8E-B652-EA3D011B6043}|AIGamer\\AIGamer.vcxproj|solutionrelative:AIGamer\\speed.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{70E370C5-3487-4C8E-B652-EA3D011B6043}|AIGamer\\AIGamer.vcxproj|C:\\Users\\jjunk\\HealthyShooter\\AIGamer\\BulletPool.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{70E370C5-3487-4C8E-B652-EA3D011B6043}|AIGamer\\AIGamer.vcxproj|solutionrelative:AIGamer\\BulletPool.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70E370C5-3487-4C8E-B652-EA3D011B6043}|AIGamer\\AIGamer.vcxproj|C:\\Users\\jjunk\\HealthyShooter\\AIGamer\\BulletPool.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{70E370C5-3487-4C8E-B652-EA3D011B6043}|AIGamer\\AIGamer.vcxproj|solutionrelative:AIGamer\\BulletPool.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{70E370C5-3487-4C8E-B652-EA3D011B6043}|AIGamer\\AIGamer.vcxproj|C:\\Users\\jjunk\\HealthyShooter\\AIGamer\\bullet.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{70E370C5-3487-4C8E-B652-EA3D011B6043}|AIGamer\\AIGamer.vcxproj|solutionrelative:AIGamer\\bullet.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -104,7 +104,7 @@
               "RelativeDocumentMoniker": "AIGamer\\Main.cpp",
               "ToolTip": "C:\\Users\\jjunk\\HealthyShooter\\AIGamer\\Main.cpp",
               "RelativeToolTip": "AIGamer\\Main.cpp",
-              "ViewState": "AgIAADsCAAAAAAAAAAAIwEsCAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAHsCAAAAAAAAAAAAAIECAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-07-08T05:39:03.016Z",
               "IsPinned": true,
@@ -121,8 +121,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-07-08T05:41:56.64Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -135,8 +134,7 @@
               "ViewState": "AgIAAGsAAAAAAAAAAAAAAIQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-07-08T05:39:28.546Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -149,8 +147,7 @@
               "ViewState": "AgIAAA4AAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-07-10T05:20:50.15Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -163,8 +160,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAGYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-07-10T05:23:34.281Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -177,8 +173,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-07-08T05:44:59.301Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -191,12 +186,11 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-07-08T05:47:16.619Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 2,
               "Title": "BulletPool.h",
               "DocumentMoniker": "C:\\Users\\jjunk\\HealthyShooter\\AIGamer\\BulletPool.h",
               "RelativeDocumentMoniker": "AIGamer\\BulletPool.h",
@@ -210,7 +204,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 1,
               "Title": "BulletPool.cpp",
               "DocumentMoniker": "C:\\Users\\jjunk\\HealthyShooter\\AIGamer\\BulletPool.cpp",
               "RelativeDocumentMoniker": "AIGamer\\BulletPool.cpp",
@@ -224,7 +218,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "speed.h",
               "DocumentMoniker": "C:\\Users\\jjunk\\HealthyShooter\\AIGamer\\speed.h",
               "RelativeDocumentMoniker": "AIGamer\\speed.h",
@@ -233,12 +227,11 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-07-26T16:28:36.414Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "speed.cpp",
               "DocumentMoniker": "C:\\Users\\jjunk\\HealthyShooter\\AIGamer\\speed.cpp",
               "RelativeDocumentMoniker": "AIGamer\\speed.cpp",
@@ -247,8 +240,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-07-26T16:32:00.651Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -256,7 +248,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "GameData.h",
               "DocumentMoniker": "C:\\Users\\jjunk\\HealthyShooter\\AIGamer\\GameData.h",
               "RelativeDocumentMoniker": "AIGamer\\GameData.h",
@@ -264,25 +256,24 @@
               "RelativeToolTip": "AIGamer\\GameData.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-08-03T10:16:41.68Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-03T10:16:41.68Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Boss.cpp",
               "DocumentMoniker": "C:\\Users\\jjunk\\HealthyShooter\\AIGamer\\Boss.cpp",
               "RelativeDocumentMoniker": "AIGamer\\Boss.cpp",
               "ToolTip": "C:\\Users\\jjunk\\HealthyShooter\\AIGamer\\Boss.cpp",
               "RelativeToolTip": "AIGamer\\Boss.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-07-31T03:09:24.413Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "Boss.h",
               "DocumentMoniker": "C:\\Users\\jjunk\\HealthyShooter\\AIGamer\\Boss.h",
               "RelativeDocumentMoniker": "AIGamer\\Boss.h",
@@ -290,12 +281,11 @@
               "RelativeToolTip": "AIGamer\\Boss.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-07-31T03:02:21.878Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T03:02:21.878Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "ScoreItemPool.cpp",
               "DocumentMoniker": "C:\\Users\\jjunk\\HealthyShooter\\AIGamer\\ScoreItemPool.cpp",
               "RelativeDocumentMoniker": "AIGamer\\ScoreItemPool.cpp",
@@ -303,12 +293,11 @@
               "RelativeToolTip": "AIGamer\\ScoreItemPool.cpp",
               "ViewState": "AgIAABYAAAAAAAAAAAAAAC8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-07-31T01:22:55.255Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T01:22:55.255Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "ScoreItemPool.h",
               "DocumentMoniker": "C:\\Users\\jjunk\\HealthyShooter\\AIGamer\\ScoreItemPool.h",
               "RelativeDocumentMoniker": "AIGamer\\ScoreItemPool.h",
@@ -316,12 +305,11 @@
               "RelativeToolTip": "AIGamer\\ScoreItemPool.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-07-31T01:20:17.276Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T01:20:17.276Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "ScoreItem.cpp",
               "DocumentMoniker": "C:\\Users\\jjunk\\HealthyShooter\\AIGamer\\ScoreItem.cpp",
               "RelativeDocumentMoniker": "AIGamer\\ScoreItem.cpp",
@@ -329,12 +317,11 @@
               "RelativeToolTip": "AIGamer\\ScoreItem.cpp",
               "ViewState": "AgIAABkAAAAAAAAAAAAAADIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-07-31T01:12:57.489Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T01:12:57.489Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "ScoreItem.h",
               "DocumentMoniker": "C:\\Users\\jjunk\\HealthyShooter\\AIGamer\\ScoreItem.h",
               "RelativeDocumentMoniker": "AIGamer\\ScoreItem.h",
@@ -342,12 +329,11 @@
               "RelativeToolTip": "AIGamer\\ScoreItem.h",
               "ViewState": "AgIAAAcAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-07-31T01:08:30.556Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T01:08:30.556Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "sound.cpp",
               "DocumentMoniker": "C:\\Users\\jjunk\\HealthyShooter\\AIGamer\\sound.cpp",
               "RelativeDocumentMoniker": "AIGamer\\sound.cpp",
@@ -355,12 +341,11 @@
               "RelativeToolTip": "AIGamer\\sound.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-07-30T16:04:16.714Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-30T16:04:16.714Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "sound.h",
               "DocumentMoniker": "C:\\Users\\jjunk\\HealthyShooter\\AIGamer\\sound.h",
               "RelativeDocumentMoniker": "AIGamer\\sound.h",
@@ -368,12 +353,11 @@
               "RelativeToolTip": "AIGamer\\sound.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-07-30T16:01:49.588Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-30T16:01:49.588Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "config.h",
               "DocumentMoniker": "C:\\Users\\jjunk\\HealthyShooter\\AIGamer\\config.h",
               "RelativeDocumentMoniker": "AIGamer\\config.h",
@@ -381,8 +365,7 @@
               "RelativeToolTip": "AIGamer\\config.h",
               "ViewState": "AgIAAA8AAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-07-14T02:19:03.872Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-14T02:19:03.872Z"
             }
           ]
         }
