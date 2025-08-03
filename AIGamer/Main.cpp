@@ -43,11 +43,6 @@ enum class GamePhase {
 	Enging,
 };
 
-//エンディング中の管理
-enum class EndingAnimation {
-	Sliding,
-	Blinking,
-};
 
 //================================================================================
 //ヘルパー関数
@@ -56,8 +51,8 @@ enum class EndingAnimation {
 
 //エネミーを出現させるヘルパー関数
 void SpawnWave1(Array<Enemy>& enemies) {
-	const Enemy::EnemyParam GruntParam{ .recognitionRange = 1000, .attackRange = 300,.size = 60,.fireRate = 0.1,.color = Palette::Red,.hp = 1 };
-	const Enemy::EnemyParam SniperParam{ .recognitionRange = 1000, .attackRange = 500,.size = 30, .fireRate = 0.5,.color = Palette::Green,.hp = 2 };
+	const Enemy::EnemyParam GruntParam{ .recognitionRange = 1000, .attackRange = 400,.size = 60,.fireRate = 0.1 / (double)GameData::GetPlayerLevel(),.color = Palette::Red,.hp = 1};
+	const Enemy::EnemyParam SniperParam{ .recognitionRange = 1000, .attackRange = 500 * (double)GameData::GetPlayerLevel(),.size = 30, .fireRate = 0.5,.color = Palette::Green,.hp = 2 };
 	for (size_t i = 0; i < Config::wave1EnemyNum * GameData::gameLevel; i++) {
 		if (i < Config::wave1SpawnThreshold * GameData::gameLevel)	enemies.emplace_back(RandomVec2(Config::movableArea.stretched(-100)), GruntParam);
 		if (i >= Config::wave1SpawnThreshold * GameData::gameLevel) enemies.emplace_back(RandomVec2(Config::movableArea.stretched(-100)), SniperParam);
@@ -66,8 +61,8 @@ void SpawnWave1(Array<Enemy>& enemies) {
 }
 
 void SpawnWave2(Array<Enemy>& enemies) {
-	const Enemy::EnemyParam GruntParam{ .recognitionRange = 1000, .attackRange = 300,.size = 60,.fireRate = 0.1,.color = Palette::Red,.hp = 1 };
-	const Enemy::EnemyParam SniperParam{ .recognitionRange = 1000, .attackRange = 500,.size = 30, .fireRate = 0.5,.color = Palette::Green,.hp = 2 };
+	const Enemy::EnemyParam GruntParam{ .recognitionRange = 1000, .attackRange = 400,.size = 60,.fireRate = 0.1 / (double)GameData::GetPlayerLevel(),.color = Palette::Red,.hp = 1 };
+	const Enemy::EnemyParam SniperParam{ .recognitionRange = 1000, .attackRange = 500 * (double)GameData::GetPlayerLevel(),.size = 30, .fireRate = 0.5,.color = Palette::Green,.hp = 2 };
 	for (size_t i = 0; i < Config::wave2EnemyNum * GameData::gameLevel; i++) {
 		if (i < Config::wave2SpawnThreshold * GameData::gameLevel)	enemies.emplace_back(RandomVec2(Config::movableArea.stretched(-100)), GruntParam);
 		if (i >= Config::wave2SpawnThreshold * GameData::gameLevel) enemies.emplace_back(RandomVec2(Config::movableArea.stretched(-100)), SniperParam);
@@ -75,8 +70,8 @@ void SpawnWave2(Array<Enemy>& enemies) {
 }
 
 void SpawnWave3(Array<Enemy>& enemies) {
-	const Enemy::EnemyParam GruntParam{ .recognitionRange = 1000, .attackRange = 300,.size = 60,.fireRate = 0.1,.color = Palette::Red,.hp = 1 };
-	const Enemy::EnemyParam SniperParam{ .recognitionRange = 1000, .attackRange = 500,.size = 30, .fireRate = 0.5,.color = Palette::Green,.hp = 2 };
+	const Enemy::EnemyParam GruntParam{ .recognitionRange = 1000, .attackRange = 400,.size = 60,.fireRate = 0.1 / (double)GameData::GetPlayerLevel(),.color = Palette::Red,.hp = 1 };
+	const Enemy::EnemyParam SniperParam{ .recognitionRange = 1000, .attackRange = 500 * (double)GameData::GetPlayerLevel(),.size = 30, .fireRate = 0.5,.color = Palette::Green,.hp = 2 };
 	for (size_t i = 0; i < Config::wave3EnemyNum * GameData::gameLevel; i++) {
 		if (i < Config::wave3SpawnThreshold * GameData::gameLevel)	enemies.emplace_back(RandomVec2(Config::movableArea.stretched(-100)), GruntParam);
 		if (i >= Config::wave3SpawnThreshold * GameData::gameLevel) enemies.emplace_back(RandomVec2(Config::movableArea.stretched(-100)), SniperParam);
@@ -138,6 +133,10 @@ public:
 
 		return false;
 	}
+
+	void changeCoolDown(float nextIntervalSec) {
+		m_intervalSec = nextIntervalSec;
+	}
 private:
 	double m_intervalSec;
 	Stopwatch m_timer;
@@ -194,7 +193,7 @@ void Init(
 	playerBulletPool.reset();
 	scoreItemPool.reset();
 	camera = Camera2D(player.getShape().center, 1.0);
-	shooter = CooldownShooter(0.5);
+	shooter = CooldownShooter(0.5 / GameData::GetPlayerLevel());
 	sceneSpeed = Speed();
 	nowPhase = GamePhase::Playing;
 	inputDelayStopWatch.reset();
@@ -575,12 +574,7 @@ void Main()
 			}
 			//==================================nowPhase::Ending==============================
 			case GamePhase::Enging:
-				static EndingAnimation animState = EndingAnimation::Sliding;
-				static Stopwatch animTimer;
 				const double slideDuration = 0.8;
-
-
-				if (not animTimer.isStarted())	animTimer.start();
 
 				static const Array<String> EndingMassages = {
 					U"Clearing the enemies",
@@ -659,9 +653,9 @@ void Main()
 			if (nowPhase != GamePhase::Enging) {
 				if (showText == true) {
 					SimpleGUI::GetFont()(U"Result : PUSH TO SPACE").drawAt(Scene::Center(), Palette::White);
-					SimpleGUI::GetFont()(U"Score: " + Format(score) ).drawAt({Scene::Center().x,Scene::Center().y - 20}, Palette::White);
-
 				}
+				SimpleGUI::GetFont()(U"Score: " + Format(score)).drawAt({ Scene::Center().x,Scene::Center().y - 20 }, Palette::White);
+				SimpleGUI::GetFont()(U"NextLevel: " + Format(GameData::gameLevel)).drawAt({ Scene::Center().x,Scene::Center().y - 40 }, Palette::White);
 
 
 				if (KeySpace.pressed() && inputDelayStopWatch > 0.5s) {
