@@ -1,6 +1,6 @@
 # HealthyShooter
 C++ Siv3D を利用して作成したシューティングゲーム
-###実行方法
+### 実行方法
 1.ReleaseからHeartyShooter.zipをダウンロードして解凍
 2.HertyShooterファイルの中にある.exeファイルを実行
 
