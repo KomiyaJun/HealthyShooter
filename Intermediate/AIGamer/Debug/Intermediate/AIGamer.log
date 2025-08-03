@@ -1,4 +1,7 @@
 ﻿  Main.cpp
+C:\Users\jjunk\HealthyShooter\AIGamer\Main.cpp(580,18): warning C4189: 'slideDuration': ローカル変数が初期化されましたが、参照されていません
+  (ソース ファイル '/Main.cpp' をコンパイルしています)
+  
   AIGamer.vcxproj -> C:\Users\jjunk\HealthyShooter\Intermediate\AIGamer\Debug\AIGamer(debug).exe
   C:\Users\jjunk\HealthyShooter\Intermediate\AIGamer\Debug\AIGamer(debug).exe
   1 個のファイルをコピーしました

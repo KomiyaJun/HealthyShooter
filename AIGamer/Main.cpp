@@ -43,6 +43,12 @@ enum class GamePhase {
 	Enging,
 };
 
+//エンディング中の管理
+enum class EndingAnimation {
+	Sliding,
+	Blinking,
+};
+
 //================================================================================
 //ヘルパー関数
 //================================================================================
@@ -205,7 +211,7 @@ void Main()
 	Player player{ {0,0},15 };		//プレイヤーキャラクター
 	Array<Enemy>enemies;			//エネミーArray
 	Optional<Boss> boss;
-	BulletPool enemyBulletPool{ 200 };//敵弾
+	BulletPool enemyBulletPool{ 2000 };//敵弾
 	BulletPool playerBulletPool{ 50 };//自弾
 	ScoreItemPool scoreItemPool{ 100 }; //スコアアイテム
 	//===================カメラとシューター====================
@@ -240,7 +246,7 @@ void Main()
 	Optional<std::function<Optional<double>()>> effect;
 	double sceneSpeeder = 1.0;
 
-
+	
 	//==================処理開始===============================
 	while (System::Update())
 	{
@@ -569,27 +575,71 @@ void Main()
 			}
 			//==================================nowPhase::Ending==============================
 			case GamePhase::Enging:
+				static EndingAnimation animState = EndingAnimation::Sliding;
+				static Stopwatch animTimer;
+				const double slideDuration = 0.8;
 
-				if (fewSecondTrue(0.5)) {
-					if (showText == true) showText = false;
-					else if (showText == false) showText = true;
+
+				if (not animTimer.isStarted())	animTimer.start();
+
+				static const Array<String> EndingMassages = {
+					U"Clearing the enemies",
+					U"Your Win",
+					U"Game Level Increase"
+
+				};
+
+				static size_t messageIndex = 0;
+				static Stopwatch textTimer;
+				static bool allMessageShown = false;
+
+				if (not textTimer.isStarted())	textTimer.start();
+
+				if (allMessageShown) {
+					if (fewSecondTrue(0.5)) {
+						showText = not showText;
+					}
+					if (showText) {
+						SimpleGUI::GetFont()(U"PUSH TO SPACE").drawAt(Scene::Center(), Palette::Black);
+					}
+				}
+				else {
+					const double charsPerSecond = 15.0;
+					const String& currentMessage = EndingMassages[messageIndex];
+					size_t visibleChars = static_cast<size_t>(textTimer.sF() * charsPerSecond);
+					visibleChars = Min(visibleChars, currentMessage.length());
+
+					SimpleGUI::GetFont()(currentMessage.substr(0, visibleChars)).draw(Arg::center(Scene::Center()), Palette::Black);
+
+					if (KeySpace.down() || MouseL.down()) {
+						if (visibleChars < currentMessage.length()) {
+							textTimer.set(SecondsF{ 999.0 });
+						}
+						else {
+							messageIndex++;
+							textTimer.restart();
+
+							if (messageIndex >= EndingMassages.size()) {
+								allMessageShown = true;
+							}
+						}
+					}
 				}
 
-				if (showText == true) {
-					SimpleGUI::GetFont()(U"Clear! : PUSH TO SPACE").drawAt(Scene::Center(), Palette::Black);
-				}
 
-				if (KeySpace.pressed()) {
+				if (allMessageShown && (KeySpace.down() || MouseL.down())) {
 					inputDelayStopWatch.restart();
-
 					nowScene = GameScene::Result;
 					nowPhase = GamePhase::Playing;
 
-					GameData::OnGameClear();
 					whiteoutAlpha = 0.0;
 					whiteoutTimer.reset();
-
+					messageIndex = 0;
+					allMessageShown = false;
+					GameData::OnGameClear();
+					textTimer.restart();
 				}
+
 				break;
 			}
 

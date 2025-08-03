@@ -1,6 +1,7 @@
 ﻿//Boss.cpp
 
 #include "Boss.h"
+#include "GameData.h"
 
 Boss::Boss(const Vec2& pos, BulletPool& bullets)
 	: m_shape{ pos,200 }
@@ -39,7 +40,7 @@ void Boss::updateIdle(const Vec2& playerPos) {
 }
 
 void Boss::updateSpiralShot(Speed speedM) {
-	if (m_stateTimer.ms() % 10 == 0)
+	if (m_stateTimer.ms() % (10 / GameData::gameLevel) == 0)
 	{
 		const Vec2 velocity = Vec2::Right().rotated(m_spiralAngle).setLength(300);
 		m_bulletPool.create(m_shape.center, velocity, Palette::Magenta);
@@ -57,10 +58,11 @@ void Boss::updateSpiralShot(Speed speedM) {
 void Boss::updateShotgun(const Vec2& playerPos, Speed speedM) {
 	const int32 shootLimit = 3;
 
+	const int shootNum = 10 * GameData::gameLevel;
 	if (m_stateTimer > 1.5s) {
 		const Vec2 toPlayer = (playerPos - m_shape.center).normalize();
 
-		for (int i = -10; i <= 10; i++) {
+		for (int i = -shootNum; i <= shootNum; i++) {
 			Vec2 velocity = toPlayer.rotated(i * 10_deg).setLength(500);
 			m_bulletPool.create(m_shape.center, velocity, Palette::Orange);
 		}
